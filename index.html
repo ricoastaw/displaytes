@@ -1,0 +1,1165 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pelayanan Publik - BPJN LAMPUNG</title>
+    
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
+    <link rel="icon" href="https://simpel-bpjnlampung.cloud/img/icon.png" type="image/png">
+    
+    <style>
+        /* === STYLING UTAMA === */
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 auto);
+            height: auto;
+            overflow: hidden;
+        }
+
+        /* Carousel mengisi seluruh layar */
+        .carousel {
+            height: 100vh;
+        }
+
+        .carousel-item {
+            height: 100vh;
+            background: 
+            url(https://simpel-bpjnlampung.cloud/img/bg.jpeg) no-repeat center center/cover;
+            position: relative;
+        }
+
+        /* === HEADER LINKS (KANAN ATAS) === */
+        .header-links {
+            position: absolute;
+            top: 230px;
+            right: 90px;
+            z-index: 1000;
+            display: flex;
+            gap: 15px;
+            flex-direction: row;
+            align-items: flex-end;
+        }
+
+        .header-link {
+            display: inline-flex;
+            align-items: center;
+            text-decoration: none;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 0.85rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+            backdrop-filter: blur(10px);
+        }
+
+        .whatsapp-header {
+            background: rgba(37, 211, 102, 0.9);
+            color: white;
+        }
+
+        .whatsapp-header:hover {
+            background: rgba(37, 211, 102, 1);
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(37, 211, 102, 0.4);
+        }
+
+        .spreadsheet-link {
+            background: rgba(52, 168, 83, 0.9);
+            color: white;
+        }
+
+        .spreadsheet-link:hover {
+            background: rgba(52, 168, 83, 1);
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(52, 168, 83, 0.4);
+        }
+
+        .header-link i {
+            font-size: 1.1rem;
+            margin-right: 6px;
+        }
+
+        /* === SLIDE PERTAMA - PELAYANAN PUBLIK === */
+        .main-slide {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: white;
+            padding: 20px;
+            height: 100vh;
+            position: relative;
+        }
+
+        .main-title {
+            font-size: 4rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .main-subtitle {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            opacity: 0.9;
+        }
+
+        /* Jam dan Tanggal - UKURAN DIPERKECIL LAGI */
+        .datetime-container {
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 10px; /* Diperkecil dari 15px */
+            margin-bottom: 15px; /* Diperkecil dari 20px */
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .clock {
+            font-size: 1.5rem; /* Diperkecil dari 2rem */
+            font-weight: bold;
+            margin-bottom: 3px; /* Diperkecil dari 5px */
+        }
+
+        .date {
+            font-size: 0.85rem; /* Diperkecil dari 1rem */
+            opacity: 0.9;
+        }
+
+        /* === TOMBOL REFRESH === */
+        .refresh-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            padding: 0 5px;
+        }
+
+        .refresh-title {
+            color: #2c3e50;
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin: 0;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.1);
+        }
+
+        #refreshBtn {
+            background: linear-gradient(45deg, #3498db, #2980b9);
+            border: none;
+            border-radius: 25px;
+            padding: 10px 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(52, 152, 219, 0.3);
+        }
+
+        #refreshBtn:hover {
+            background: linear-gradient(45deg, #2980b9, #1f618d);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(52, 152, 219, 0.4);
+        }
+
+        #refreshBtn:active {
+            transform: translateY(0);
+        }
+
+        #refreshBtn:disabled {
+            background: #95a5a6;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        .refresh-spinning {
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        /* Status indikator */
+        .last-update {
+            font-size: 0.75rem;
+            color: #7f8c8d;
+            margin-top: 5px;
+            font-style: italic;
+        }
+
+        /* Auto-scroll status indicator */
+        .scroll-status {
+            font-size: 0.7rem;
+            color: #3498db;
+            margin-top: 2px;
+            font-weight: 500;
+        }
+
+        .scroll-paused {
+            color: #e74c3c;
+        }
+
+        /* Container Tabel - DESIGN YANG LEBIH MENARIK */
+        .table-container {
+            background: linear-gradient(145deg, #ffffff 0%, #f8f9fa 100%);
+            border-radius: 20px;
+            padding: 25px;
+            width: 95%; /* Diperbesar dari 90% */
+            max-width: 1400px; /* Diperbesar dari 1200px */
+            height: 420px; /* Diperbesar dari 350px */
+            overflow: hidden;
+            box-shadow: 
+                0 20px 40px rgba(0,0,0,0.1),
+                0 0 0 1px rgba(255,255,255,0.5);
+            border: 2px solid rgba(255,255,255,0.2);
+            margin-top: -30px; /* GESER KE ATAS */
+            margin-bottom: 30px; /* TAMBAH RUANG DI BAWAH */
+        }
+
+        .table-scroll {
+            height: 320px; /* Diperbesar dari 250px */
+            overflow-y: auto;
+            scrollbar-width: thin;
+            scrollbar-color: #bdc3c7 #ecf0f1;
+        }
+
+        .table-scroll::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .table-scroll::-webkit-scrollbar-track {
+            background: #ecf0f1;
+            border-radius: 10px;
+        }
+
+        .table-scroll::-webkit-scrollbar-thumb {
+            background: linear-gradient(45deg, #3498db, #2980b9);
+            border-radius: 10px;
+        }
+
+        .table-scroll::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(45deg, #2980b9, #1f618d);
+        }
+
+        /* TABEL YANG LEBIH MENARIK */
+        .table {
+            color: #2c3e50;
+            margin-bottom: 0;
+            font-size: 0.9rem;
+            border-collapse: separate;
+            border-spacing: 0;
+        }
+
+        .table th {
+            background: linear-gradient(135deg, #34495e 0%, #2c3e50 100%);
+            color: white;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+            font-weight: 700;
+            text-align: center;
+            vertical-align: middle;
+            padding: 15px 10px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-size: 0.85rem;
+            border: none;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .table th:first-child {
+            border-top-left-radius: 12px;
+        }
+
+        .table th:last-child {
+            border-top-right-radius: 12px;
+        }
+
+        .table td {
+            vertical-align: top;
+            padding: 12px 10px;
+            border-bottom: 1px solid #ecf0f1;
+            transition: all 0.3s ease;
+        }
+
+        .table tbody tr {
+            transition: all 0.3s ease;
+        }
+
+        .table tbody tr:hover {
+            background: linear-gradient(90deg, #f8f9fa 0%, #e9ecef 100%);
+            transform: scale(1.01);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        .table tbody tr:nth-child(even) {
+            background-color: rgba(52, 152, 219, 0.05);
+        }
+
+        /* Kolom No lebih kecil */
+        .col-no {
+            width: 8%;
+            text-align: center;
+            font-weight: 600;
+            color: #3498db;
+        }
+
+        /* Kolom Jenis Layanan */
+        .col-layanan {
+            width: 30%;
+            font-weight: 500;
+        }
+
+        /* Kolom Pemohon */
+        .col-pemohon {
+            width: 25%;
+            color: #2c3e50;
+        }
+
+        /* Kolom Status - DIPERBAIKI AGAR TIDAK WRAP */
+        .col-status {
+            width: 15%; /* Diperbesar dari 12% */
+            text-align: center;
+            white-space: nowrap; /* Mencegah text wrap */
+        }
+
+        /* Kolom Keterangan */
+        .col-keterangan {
+            width: 22%; /* Dikurangi dari 25% */
+            font-size: 0.85rem;
+            text-align: justify;
+            color: #7f8c8d;
+        }
+
+        /* Status badges dengan EMOJI - DESIGN LEBIH MENARIK */
+        .status-selesai {
+            background: linear-gradient(45deg, #27ae60, #2ecc71);
+            color: white;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            box-shadow: 0 3px 10px rgba(39, 174, 96, 0.3);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            white-space: nowrap;
+        }
+
+        .status-proses {
+            background: linear-gradient(45deg, #f39c12, #e67e22);
+            color: white;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            box-shadow: 0 3px 10px rgba(243, 156, 18, 0.3);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            white-space: nowrap;
+        }
+
+        .status-belum-selesai {
+            background: linear-gradient(45deg, #e74c3c, #c0392b);
+            color: white;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            box-shadow: 0 3px 10px rgba(231, 76, 60, 0.3);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            white-space: nowrap;
+        }
+
+        /* === HIDE MOBILE ELEMENTS === */
+            .hide-mobile {
+                display: none;
+            }
+
+        /* === FOOTER EMBEDDED DI SEMUA SLIDE === */
+        .footer-embedded {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(90deg, rgba(44, 62, 80, 0.9) 0%, rgba(52, 73, 94, 0.9) 100%);
+            backdrop-filter: blur(10px);
+            color: white;
+            text-align: center;
+            padding: 2.1px 20px;
+            font-size: 0.75rem;
+            border-top: 2px solid rgba(255,255,255,0.1);
+            box-shadow: 0 -5px 20px rgba(0,0,0,0.2);
+        }
+
+        .footer-embedded .footer-text {
+            margin: 0;
+            font-weight: 500;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.3);
+        }
+
+        /* === SLIDE MEDIA === */
+        .media-slide {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            padding-bottom: 80px; /* Space for footer */
+        }
+
+        .media-content {
+            max-width: 90%;
+            max-height: 80%;
+            border-radius: 15px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+        }
+
+        .media-content img,
+        .media-content video {
+            width: 100%;
+            height: auto;
+            border-radius: 15px;
+        }
+
+        /* === NAVIGASI CAROUSEL === */
+        .carousel-control-prev,
+        .carousel-control-next {
+            width: 5%;
+            opacity: 0.8;
+            transition: opacity 0.3s;
+        }
+
+        .carousel-control-prev:hover,
+        .carousel-control-next:hover {
+            opacity: 1;
+        }
+
+        .carousel-control-prev-icon,
+        .carousel-control-next-icon {
+            background-size: 100%;
+            width: 3rem;
+            height: 3rem;
+        }
+
+        /* === RESPONSIVE DESIGN === */
+        @media (max-width: 992px) {
+            .table-container {
+                width: 95%; /* Tetap besar */
+                height: 380px; /* Diperbesar dari 320px */
+                margin-top: -20px; /* Sesuaikan untuk tablet */
+            }
+            
+            .table-scroll {
+                height: 280px; /* Diperbesar dari 220px */
+            }
+            
+            .table {
+                font-size: 0.8rem;
+            }
+            
+            .col-layanan {
+                width: 35%;
+            }
+            
+            .col-pemohon {
+                width: 20%;
+            }
+            
+            .col-keterangan {
+                width: 20%;
+            }
+
+            .header-links {
+                top: 15px;
+                right: 15px;
+                gap: 10px;
+            }
+
+            .header-link {
+                font-size: 0.8rem;
+                padding: 6px 12px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .main-title {
+                font-size: 2.5rem;
+            }
+            
+            .main-subtitle {
+                font-size: 1.5rem;
+            }
+            
+            .clock {
+                font-size: 1.2rem; /* Diperkecil dari 1.5rem */
+            }
+            
+            .date {
+                font-size: 0.75rem; /* Diperkecil dari 0.9rem */
+            }
+            
+            .table-container {
+                width: 98%; /* Diperbesar dari 95% */
+                height: 340px; /* Diperbesar dari 280px */
+                padding: 15px;
+                margin-top: -15px; /* Sesuaikan untuk mobile */
+            }
+            
+            .table-scroll {
+                height: 240px; /* Diperbesar dari 180px */
+            }
+            
+            .table {
+                font-size: 0.75rem;
+            }
+            
+            .table td {
+                padding: 8px 6px;
+            }
+
+            .footer-embedded {
+                font-size: 0.65rem;
+                padding: 10px 15px;
+            }
+
+            .header-links {
+                top: 10px;
+                right: 10px;
+                gap: 8px;
+            }
+
+            .header-link {
+                font-size: 0.75rem;
+                padding: 5px 10px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .main-title {
+                font-size: 2rem;
+            }
+            
+            .main-subtitle {
+                font-size: 1.2rem;
+            }
+            
+            .clock {
+                font-size: 1rem; /* Diperkecil dari 1.2rem */
+            }
+            
+            .date {
+                font-size: 0.7rem; /* Diperkecil */
+            }
+            
+            .table-container {
+                height: 300px; /* Diperbesar dari 250px */
+                padding: 10px;
+                width: 98%; /* Maksimalkan lebar */
+                margin-top: -10px; /* Sesuaikan untuk mobile kecil */
+            }
+            
+            .table-scroll {
+                height: 200px; /* Diperbesar dari 150px */
+            }
+            
+            .table {
+                font-size: 0.7rem;
+            }
+            
+            .col-layanan {
+                width: 40%;
+            }
+            
+            .col-pemohon {
+                width: 30%;
+            }
+            
+            .col-status {
+                width: 20%;
+            }
+
+            .footer-embedded {
+                font-size: 0.6rem;
+                padding: 8px 10px;
+            }
+
+            .header-links {
+                flex-direction: row;
+                gap: 5px;
+            }
+
+            .header-link {
+                font-size: 0.7rem;
+                padding: 4px 8px;
+            }
+
+            .header-link i {
+                font-size: 0.9rem;
+                margin-right: 4px;
+            }
+        }
+    </style>
+</head>
+<body>
+ 
+    <!-- === CAROUSEL UTAMA === -->
+    <div id="mainCarousel" class="carousel slide" data-bs-ride="false">
+        
+        <div class="carousel-inner">
+ 
+            <!-- SLIDE 1: PELAYANAN PUBLIK -->
+            <div class="carousel-item active">
+                
+                <div class="main-slide">
+                    <!-- Header Utama -->
+                    <h1 class="main-title">PELAYANAN PUBLIK</h1>
+                    <h2 class="main-subtitle">BPJN LAMPUNG</h2>
+
+                    <!-- Jam dan Tanggal Real-time -->
+                    <div class="datetime-container">
+                        <div id="clock" class="clock">00:00:00</div>
+                        <div id="date" class="date">Loading...</div>
+                    </div>
+                    
+                    <!-- === HEADER LINKS === -->
+    <div class="header-link">
+        <a href="https://api.whatsapp.com/send/?phone=6285380008062&text&type=phone_number&app_absent=0"
+           target="_blank" class="header-link whatsapp-header">
+            <i class="bi bi-whatsapp"></i>
+            Call Center
+        </a>
+        <a href="https://docs.google.com/spreadsheets/d/1uXZz-UZF0DsUCkHlysqBlXQrBXzqYNFseuZnuGRINHw/edit"
+           target="_blank" class="header-link spreadsheet-link">
+            <i class="bi bi-table"></i>
+            Data Sheet
+        </a>
+    </div>
+
+                    <!-- Tabel Data dari Google Spreadsheet -->
+                    <div class="table-container">
+                        
+                        <!-- Header dengan tombol refresh -->
+                        <div class="refresh-container">
+                            <h5 class="refresh-title">
+                                <i class="bi bi-table"></i> Data Pelayanan Real-time
+                            </h5>
+                            <div class="d-flex flex-column align-items-end">
+                                <button id="refreshBtn" class="btn btn-primary btn-sm" onclick="refreshTableData()">
+                                    <i class="bi bi-arrow-clockwise" id="refreshIcon"></i>
+                                    <span id="refreshText">Refresh</span>
+                                </button>
+                                <div id="lastUpdate" class="last-update">Terakhir diperbarui: -</div>
+                                <div id="scrollStatus" class="scroll-status">Auto-scroll: Aktif</div>
+                            </div>
+                        </div>
+                        
+                        <div id="tableScroll" class="table-scroll">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th class="col-no">No</th>
+                                        <th class="col-layanan">Jenis Layanan</th>
+                                        <th class="col-pemohon">Pemohon</th>
+                                        <th class="col-status">Status</th>
+                                        <th class="col-keterangan">Keterangan</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="dataTable">
+                                    <!-- Data akan dimuat dari Google Spreadsheet -->
+                                    <tr><td colspan="5" class="text-center">Memuat data...</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- SLIDE 2: GAMBAR CONTOH -->
+            <div class="carousel-item">
+                <div class="media-slide">
+                    <div class="media-content">
+                        <img src="https://via.placeholder.com/800x600/4a90e2/ffffff?text=Slide+2+-+Gambar+Contoh"
+                             alt="Slide 2" class="img-fluid">
+                    </div>
+                </div>
+            </div>
+            
+            <!-- SLIDE 3: VIDEO CONTOH -->
+            <div class="carousel-item">
+                <div class="media-slide">
+                    <div class="media-content">
+                        <video controls autoplay muted loop>
+                            <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
+                            Browser Anda tidak mendukung video HTML5.
+                        </video>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- SLIDE 4: GAMBAR LAIN -->
+            <div class="carousel-item">
+                <div class="media-slide">
+                    <div class="media-content">
+                        <img src="https://via.placeholder.com/800x600/e74c3c/ffffff?text=Slide+4+-+Informasi+Layanan"
+                             alt="Slide 4" class="img-fluid">
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Tombol Navigasi Kiri -->
+        <button class="carousel-control-prev" type="button" data-bs-target="#mainCarousel" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        
+        <!-- Tombol Navigasi Kanan -->
+        <button class="carousel-control-next" type="button" data-bs-target="#mainCarousel" data-bs-slide="next">
+            <span class="carousel-control-next-icon"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
+    </div>
+    
+    
+    <!-- Footer Embedded -->
+     <footer>
+        <div class="footer-embedded">
+            <p class="footer-text">
+                © 2025 Direktorat Jenderal Bina Marga Satuan Kerja Balai Pelaksanaan Jalan Nasional Provinsi Lampung | Kementerian Pekerjaan Umum Republik Indonesia
+            </p>
+        </div>
+     </footer>
+
+    <!-- Bootstrap 5 JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <script>
+        // === KONFIGURASI GOOGLE APPS SCRIPT ===
+        const SPREADSHEET_URL = 'https://script.google.com/macros/s/AKfycbypqlLfXRVo_3Z_zfdQGLEEiL-5GoxiMZs38KoIJYhuNBcCAKesZfDN67la1RILjRdWEw/exec';
+        
+        // === VARIABEL GLOBAL ===
+        let isRefreshing = false;
+        let lastUpdateTime = null;
+        let scrollPosition = 0;
+        let scrollDirection = 1; // 1 untuk ke bawah, -1 untuk ke atas
+        const scrollSpeed = 0.05; // Kecepatan scroll (detik)
+        
+        // === VARIABEL AUTO-SCROLL CONTROL ===
+        let autoScrollEnabled = true;
+        let autoScrollPaused = false;
+        let pauseTimeout = null;
+        const PAUSE_DURATION = 5000; // 5 detik dalam milliseconds
+
+        // === DATA DUMMY SEBAGAI FALLBACK ===
+        const dummyData = [
+            {
+                no: 1, 
+                jenisLayanan: 'Perizinan Mendirikan Bangunan', 
+                pemohon: 'PT. Maju Bersama', 
+                status: 'Selesai', 
+                keterangan: 'Dokumen telah diserahkan'
+            },
+            {
+                no: 2, 
+                jenisLayanan: 'Sertifikat Laik Fungsi Bangunan', 
+                pemohon: 'CV. Karya Utama', 
+                status: 'Proses', 
+                keterangan: 'Menunggu verifikasi lapangan'
+            },
+            {
+                no: 3, 
+                jenisLayanan: 'Izin Operasional Jalan', 
+                pemohon: 'Dinas Perhubungan', 
+                status: 'Belum Selesai', 
+                keterangan: 'Berkas dalam antrian'
+            },
+            {
+                no: 4, 
+                jenisLayanan: 'Audit Teknis Konstruksi', 
+                pemohon: 'PT. Bangun Indah', 
+                status: 'Selesai', 
+                keterangan: 'Hasil audit memenuhi standar'
+            },
+            {
+                no: 5, 
+                jenisLayanan: 'Konsultasi Teknis Jembatan', 
+                pemohon: 'Pemkab Lampung Selatan', 
+                status: 'Proses', 
+                keterangan: 'Sedang dilakukan kajian'
+            },
+            {
+                no: 6, 
+                jenisLayanan: 'Pengawasan Konstruksi Jalan', 
+                pemohon: 'PT. Jaya Konstruksi', 
+                status: 'Selesai', 
+                keterangan: 'Pengawasan tahap akhir'
+            },
+            {
+                no: 7, 
+                jenisLayanan: 'Sertifikasi Tenaga Ahli', 
+                pemohon: 'Ir. Ahmad Suryadi', 
+                status: 'Belum Selesai', 
+                keterangan: 'Menunggu jadwal ujian'
+            },
+            {
+                no: 8, 
+                jenisLayanan: 'Perizinan Lingkungan Konstruksi', 
+                pemohon: 'PT. Eco Construction', 
+                status: 'Proses', 
+                keterangan: 'Review dokumen AMDAL'
+            }
+        ];
+
+        // === FUNGSI JAM DAN TANGGAL REAL-TIME ===
+        function updateDateTime() {
+            const now = new Date();
+            
+            // Format jam (HH:MM:SS)
+            const timeString = now.toLocaleTimeString('id-ID', {
+                hour12: false,
+                hour: '2-digit',
+                minute: '2-digit',
+                second: '2-digit'
+            });
+            
+            // Format tanggal (Hari, DD Bulan YYYY)
+            const dateString = now.toLocaleDateString('id-ID', {
+                weekday: 'long',
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric'
+            });
+            
+            // Update elemen HTML
+            document.getElementById('clock').textContent = timeString;
+            document.getElementById('date').textContent = dateString;
+        }
+
+        // === FUNGSI UPDATE STATUS AUTO-SCROLL ===
+        function updateScrollStatus() {
+            const statusElement = document.getElementById('scrollStatus');
+            if (!statusElement) return;
+
+            if (autoScrollPaused) {
+                statusElement.textContent = 'Auto-scroll: Dijeda (5 detik)';
+                statusElement.classList.add('scroll-paused');
+            } else if (autoScrollEnabled) {
+                statusElement.textContent = 'Auto-scroll: Aktif';
+                statusElement.classList.remove('scroll-paused');
+            } else {
+                statusElement.textContent = 'Auto-scroll: Nonaktif';
+                statusElement.classList.remove('scroll-paused');
+            }
+        }
+
+        // === FUNGSI PAUSE AUTO-SCROLL ===
+        function pauseAutoScroll() {
+            if (pauseTimeout) {
+                clearTimeout(pauseTimeout);
+            }
+
+            autoScrollPaused = true;
+            updateScrollStatus();
+
+            // Resume auto-scroll setelah 5 detik
+            pauseTimeout = setTimeout(() => {
+                autoScrollPaused = false;
+                updateScrollStatus();
+                console.log('Auto-scroll resumed after 5 seconds');
+            }, PAUSE_DURATION);
+
+            console.log('Auto-scroll paused for 5 seconds due to user interaction');
+        }
+
+        // === FUNGSI DETEKSI KLIK SCROLLBAR ===
+        function isClickOnScrollbar(element, event) {
+            const rect = element.getBoundingClientRect();
+            const scrollbarWidth = element.offsetWidth - element.clientWidth;
+            
+            // Cek apakah klik berada di area scrollbar (sisi kanan)
+            const clickX = event.clientX - rect.left;
+            const isOnScrollbar = clickX >= (element.clientWidth);
+            
+            return isOnScrollbar && scrollbarWidth > 0;
+        }
+
+        // === FUNGSI AUTO-SCROLL TABEL ===
+        function autoScrollTable() {
+            // Jangan scroll jika sedang dijeda atau tidak diaktifkan
+            if (autoScrollPaused || !autoScrollEnabled) {
+                return;
+            }
+
+            const tableContainer = document.getElementById('tableScroll');
+            if (!tableContainer) return;
+            
+            const maxScroll = tableContainer.scrollHeight - tableContainer.clientHeight;
+            
+            // Jika tidak ada konten untuk di-scroll, keluar
+            if (maxScroll <= 0) return;
+            
+            // Scroll ke bawah
+            if (scrollDirection === 1) {
+                scrollPosition += 1;
+                if (scrollPosition >= maxScroll) {
+                    scrollDirection = -1; // Balik arah ke atas
+                }
+            }
+            // Scroll ke atas
+            else {
+                scrollPosition -= 1;
+                if (scrollPosition <= 0) {
+                    scrollDirection = 1; // Balik arah ke bawah
+                }
+            }
+            
+            tableContainer.scrollTop = scrollPosition;
+        }
+
+        // === FUNGSI DISPLAY DATA TABEL DENGAN EMOJI ===
+        function displayTableData(data) {
+            const tableBody = document.getElementById('dataTable');
+            if (!tableBody) return;
+            
+            console.log('=== DISPLAY TABLE DEBUG ===');
+            console.log('Data received:', data);
+            
+            tableBody.innerHTML = '';
+            
+            if (!data || data.length === 0) {
+                tableBody.innerHTML = '<tr><td colspan="5" class="text-center">Tidak ada data tersedia</td></tr>';
+                return;
+            }
+            
+            data.forEach((row, index) => {
+                console.log(`Row ${index}:`, row);
+                
+                // Pastikan semua field ada
+                const no = row.no || (index + 1);
+                const jenisLayanan = row.jenisLayanan || 'Tidak ada data';
+                const pemohon = row.pemohon || 'Tidak ada data';
+                const status = row.status || 'Belum Selesai';
+                const keterangan = row.keterangan || 'Tidak ada keterangan';
+                
+                let statusClass = '';
+                let statusText = '';
+                
+                // Tentukan class CSS dan emoji berdasarkan status
+                switch(status.toString().toLowerCase().trim()) {
+                    case 'selesai':
+                        statusClass = 'status-selesai';
+                        statusText = '✅ Selesai';
+                        break;
+                    case 'proses':
+                        statusClass = 'status-proses';
+                        statusText = '⚠️ Proses';
+                        break;
+                    case 'belum selesai':
+                    case 'menunggu':
+                    default:
+                        statusClass = 'status-belum-selesai';
+                        statusText = '🛑 Belum Selesai';
+                }
+                
+                const tr = document.createElement('tr');
+                tr.innerHTML = `
+                    <td class="col-no">${no}</td>
+                    <td class="col-layanan">${jenisLayanan}</td>
+                    <td class="col-pemohon">${pemohon}</td>
+                    <td class="col-status">
+                        <span class="${statusClass}">${statusText}</span>
+                    </td>
+                    <td class="col-keterangan ">${keterangan}</td>
+                `;
+                tableBody.appendChild(tr);
+            });
+        }
+
+        // === FUNGSI LOAD DATA DARI GOOGLE SPREADSHEET ===
+        function loadTableData() {
+            console.log('Loading data from:', SPREADSHEET_URL);
+            
+            fetch(SPREADSHEET_URL)
+                .then(response => {
+                    console.log('Response status:', response.status);
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! status: ${response.status}`);
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    console.log('Data received:', data);
+                    displayTableData(data);
+                    updateLastUpdateTime();
+                })
+                .catch(error => {
+                    console.error('Error loading data:', error);
+                    console.log('Using dummy data as fallback');
+                    displayTableData(dummyData);
+                    updateLastUpdateTime();
+                });
+        }
+
+        // === FUNGSI REFRESH MANUAL ===
+        function refreshTableData() {
+            if (isRefreshing) return;
+            
+            isRefreshing = true;
+            const refreshBtn = document.getElementById('refreshBtn');
+            const refreshIcon = document.getElementById('refreshIcon');
+            const refreshText = document.getElementById('refreshText');
+            
+            refreshBtn.disabled = true;
+            refreshIcon.classList.add('refresh-spinning');
+            refreshText.textContent = 'Memuat...';
+            
+            fetch(SPREADSHEET_URL)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! status: ${response.status}`);
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    displayTableData(data);
+                    updateLastUpdateTime();
+                    showRefreshFeedback('success');
+                })
+                .catch(error => {
+                    console.error('Error refreshing data:', error);
+                    displayTableData(dummyData);
+                    updateLastUpdateTime();
+                    showRefreshFeedback('error');
+                })
+                .finally(() => {
+                    refreshBtn.disabled = false;
+                    refreshIcon.classList.remove('refresh-spinning');
+                    refreshText.textContent = 'Refresh';
+                    isRefreshing = false;
+                });
+        }
+
+        // === FUNGSI UPDATE WAKTU TERAKHIR ===
+        function updateLastUpdateTime() {
+            const now = new Date();
+            const timeString = now.toLocaleTimeString('id-ID', {
+                hour: '2-digit',
+                minute: '2-digit',
+                second: '2-digit'
+            });
+            
+            const lastUpdateElement = document.getElementById('lastUpdate');
+            if (lastUpdateElement) {
+                lastUpdateElement.textContent = `Terakhir diperbarui: ${timeString}`;
+            }
+            lastUpdateTime = now;
+        }
+
+        // === FUNGSI FEEDBACK REFRESH ===
+        function showRefreshFeedback(type) {
+            const refreshBtn = document.getElementById('refreshBtn');
+            if (!refreshBtn) return;
+            
+            const originalClass = refreshBtn.className;
+            
+            if (type === 'success') {
+                refreshBtn.className = originalClass.replace('btn-primary', 'btn-success');
+                setTimeout(() => {
+                    refreshBtn.className = originalClass;
+                }, 2000);
+            } else if (type === 'error') {
+                refreshBtn.className = originalClass.replace('btn-primary', 'btn-danger');
+                setTimeout(() => {
+                    refreshBtn.className = originalClass;
+                }, 3000);
+            }
+        }
+
+        // === SETUP EVENT LISTENERS UNTUK SCROLLBAR DAN MOUSE WHEEL ===
+        function setupScrollListeners() {
+            const tableContainer = document.getElementById('tableScroll');
+            if (!tableContainer) return;
+
+            // Event listener untuk mousedown pada scrollbar
+            tableContainer.addEventListener('mousedown', function(event) {
+                if (isClickOnScrollbar(tableContainer, event)) {
+                    pauseAutoScroll();
+                    console.log('Scrollbar clicked - auto-scroll paused');
+                }
+            });
+
+            // Event listener untuk mouse wheel scroll
+            tableContainer.addEventListener('wheel', function(event) {
+                // Pause auto-scroll ketika user menggunakan mouse wheel
+                pauseAutoScroll();
+                console.log('Mouse wheel used - auto-scroll paused');
+            }, { passive: true });
+
+            // Event listener untuk touch pada area scrollbar (mobile)
+            tableContainer.addEventListener('touchstart', function(event) {
+                const touch = event.touches[0];
+                const rect = tableContainer.getBoundingClientRect();
+                const touchX = touch.clientX - rect.left;
+                const scrollbarWidth = tableContainer.offsetWidth - tableContainer.clientWidth;
+                
+                // Cek apakah touch berada di area scrollbar
+                if (touchX >= tableContainer.clientWidth && scrollbarWidth > 0) {
+                    pauseAutoScroll();
+                    console.log('Scrollbar touched - auto-scroll paused');
+                }
+            }, { passive: true });
+
+            console.log('Scroll listeners setup completed');
+        }
+
+        // === NAVIGASI KEYBOARD ===
+        document.addEventListener('keydown', function(event) {
+            const carousel = new bootstrap.Carousel(document.getElementById('mainCarousel'));
+            
+            if (event.key === 'ArrowLeft') {
+                carousel.prev();
+            } else if (event.key === 'ArrowRight') {
+                carousel.next();
+            }
+        });
+
+        // === INISIALISASI SAAT HALAMAN DIMUAT ===
+        document.addEventListener('DOMContentLoaded', function() {
+            // Update jam setiap detik
+            setInterval(updateDateTime, 1000);
+            updateDateTime();
+            
+            // Setup scroll listeners
+            setupScrollListeners();
+            
+            // Update status scroll
+            updateScrollStatus();
+            
+            // Auto-scroll tabel setiap 50ms
+            setInterval(autoScrollTable, scrollSpeed * 1000);
+            
+            // Load data pertama kali
+            loadTableData();
+            
+            // Auto-refresh setiap 5 menit
+            setInterval(() => {
+                if (!isRefreshing) {
+                    refreshTableData();
+                }
+            }, 300000); // 5 menit = 300000ms
+
+            console.log('Application initialized successfully');
+        });
+    </script>
+</body>
+</html>
