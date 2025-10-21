@@ -102,16 +102,17 @@
         }
 
         .main-title {
-            font-size: 4rem;
+            font-size: 4.2rem;
             font-weight: bold;
-            margin-bottom: 10px;
+            margin-bottom: 6px;
             text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
         }
 
         .main-subtitle {
-            font-size: 2rem;
-            margin-bottom: 20px;
+            font-size: 1.1rem;
+            margin-bottom: 10px;
             opacity: 0.9;
+             
         }
 
         /* Jam dan Tanggal - UKURAN DIPERKECIL LAGI */
@@ -119,19 +120,19 @@
             background: rgba(255,255,255,0.1);
             backdrop-filter: blur(10px);
             border-radius: 15px;
-            padding: 10px; /* Diperkecil dari 15px */
-            margin-bottom: 15px; /* Diperkecil dari 20px */
+            padding: 6px; /* Diperkecil dari 10px */
+            margin-bottom: 10px; /* Diperkecil dari 15px */
             border: 1px solid rgba(255,255,255,0.2);
         }
 
         .clock {
-            font-size: 1.5rem; /* Diperkecil dari 2rem */
+            font-size: 1rem; /* Diperkecil dari 1.5rem */
             font-weight: bold;
-            margin-bottom: 3px; /* Diperkecil dari 5px */
+            margin-bottom: 2px; /* Diperkecil dari 3px */
         }
 
         .date {
-            font-size: 0.85rem; /* Diperkecil dari 1rem */
+            font-size: 0.7rem; /* Diperkecil dari 0.85rem */
             opacity: 0.9;
         }
 
@@ -140,7 +141,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 15px;
+            margin-bottom: 1px;
             padding: 0 5px;
         }
 
@@ -213,21 +214,19 @@
         .table-container {
             background: linear-gradient(145deg, #ffffff 0%, #f8f9fa 100%);
             border-radius: 20px;
-            padding: 25px;
-            width: 95%; /* Diperbesar dari 90% */
-            max-width: 1400px; /* Diperbesar dari 1200px */
-            height: 420px; /* Diperbesar dari 350px */
+            padding: 10px;
+            width: 99%;
+            max-width: 1800px;
+            height: 650px;
             overflow: hidden;
-            box-shadow: 
-                0 20px 40px rgba(0,0,0,0.1),
-                0 0 0 1px rgba(255,255,255,0.5);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1), 0 0 0 1px rgba(255,255,255,0.5);
             border: 2px solid rgba(255,255,255,0.2);
-            margin-top: -30px; /* GESER KE ATAS */
-            margin-bottom: 30px; /* TAMBAH RUANG DI BAWAH */
+            margin-top: -10px;
+            margin-bottom: 10px;
         }
 
         .table-scroll {
-            height: 320px; /* Diperbesar dari 250px */
+            height: 540px;
             overflow-y: auto;
             scrollbar-width: thin;
             scrollbar-color: #bdc3c7 #ecf0f1;
@@ -255,13 +254,13 @@
         .table {
             color: #2c3e50;
             margin-bottom: 0;
-            font-size: 0.9rem;
+            font-size: 0.8rem;
             border-collapse: separate;
             border-spacing: 0;
         }
 
         .table th {
-            background: linear-gradient(135deg, #34495e 0%, #2c3e50 100%);
+            background: linear-gradient(135deg, #34355e 0%, #332c50 100%);
             color: white;
             position: sticky;
             top: 0;
@@ -324,6 +323,7 @@
         .col-pemohon {
             width: 25%;
             color: #2c3e50;
+            
         }
 
         /* Kolom Status - DIPERBAIKI AGAR TIDAK WRAP */
@@ -403,7 +403,7 @@
         }
 
         .footer-embedded .footer-text {
-            margin: 0;
+            margin: 10;
             font-weight: 500;
             text-shadow: 0 1px 2px rgba(0,0,0,0.3);
         }
@@ -434,7 +434,9 @@
         /* === NAVIGASI CAROUSEL === */
         .carousel-control-prev,
         .carousel-control-next {
+            top: 50%;
             width: 5%;
+            height: 5%;
             opacity: 0.8;
             transition: opacity 0.3s;
         }
@@ -619,41 +621,42 @@
  
             <!-- SLIDE 1: PELAYANAN PUBLIK -->
             <div class="carousel-item active">
-                
                 <div class="main-slide">
                     <!-- Header Utama -->
-                    <h1 class="main-title">PELAYANAN PUBLIK</h1>
-                    <h2 class="main-subtitle">BPJN LAMPUNG</h2>
-
+                    <div>
+                        <h1 class="main-title">PELAYANAN PUBLIK</h1>
+                        <h2 class="main-subtitle">BPJN LAMPUNG</h2>
+                    </div>
                     <!-- Jam dan Tanggal Real-time -->
                     <div class="datetime-container">
                         <div id="clock" class="clock">00:00:00</div>
-                        <div id="date" class="date">Loading...</div>
+                        <div id="date" class="date">Memuat...</div>
                     </div>
-                    
                     <!-- === HEADER LINKS === -->
-    <div class="header-link">
-        <a href="https://api.whatsapp.com/send/?phone=6285380008062&text&type=phone_number&app_absent=0"
-           target="_blank" class="header-link whatsapp-header">
-            <i class="bi bi-whatsapp"></i>
-            Call Center
-        </a>
-        <a href="https://docs.google.com/spreadsheets/d/1uXZz-UZF0DsUCkHlysqBlXQrBXzqYNFseuZnuGRINHw/edit"
-           target="_blank" class="header-link spreadsheet-link">
-            <i class="bi bi-table"></i>
-            Data Sheet
-        </a>
-    </div>
-
+                    <div class="header-link">
+                        <a href="https://api.whatsapp.com/send/?phone=6285380008062&text&type=phone_number&app_absent=0" target="_blank" class="header-link whatsapp-header">
+                            <i class="bi bi-whatsapp"></i>
+                            Call Center
+                        </a>
+                        <a href="https://docs.google.com/spreadsheets/d/1uXZz-UZF0DsUCkHlysqBlXQrBXzqYNFseuZnuGRINHw/edit" target="_blank" class="header-link spreadsheet-link ">
+                            <i class="bi bi-table"></i>
+                            Data Sheet
+                        </a>
+                    </div>
                     <!-- Tabel Data dari Google Spreadsheet -->
                     <div class="table-container">
-                        
-                        <!-- Header dengan tombol refresh -->
-                        <div class="refresh-container">
-                            <h5 class="refresh-title">
-                                <i class="bi bi-table"></i> Data Pelayanan Real-time
-                            </h5>
-                            <div class="d-flex flex-column align-items-end">
+                        <!-- Header dengan tombol refresh dan search -->
+                        <div class="refresh-container" style="flex-wrap">
+                            <div style="display: flex; align-items: center; width: 100%;">
+                                <h5 class="refresh-title" style="flex: 1 1 200px; margin-bottom: 0;">
+                                    <i class="bi bi-table"></i> Data Pelayanan Real-time
+                                </h5>
+                                <div id="infografis-summary" style="display: flex; gap: 18px; align-items: center; margin-left: 18px;">
+                                    <!-- Infografis will be rendered here -->
+                                </div>
+                            </div>
+                            <div class="d-flex flex-column align-items-end" style="gap: 5px;">
+                                <input id="searchInput" type="text" class="form-control form-control-sm" placeholder="Pencarian...." style="min-width: 220px; max-width: 300px; margin-bottom: 4px;" oninput="filterTableData()">
                                 <button id="refreshBtn" class="btn btn-primary btn-sm" onclick="refreshTableData()">
                                     <i class="bi bi-arrow-clockwise" id="refreshIcon"></i>
                                     <span id="refreshText">Refresh</span>
@@ -662,7 +665,6 @@
                                 <div id="scrollStatus" class="scroll-status">Auto-scroll: Aktif</div>
                             </div>
                         </div>
-                        
                         <div id="tableScroll" class="table-scroll">
                             <table class="table">
                                 <thead>
@@ -676,46 +678,56 @@
                                 </thead>
                                 <tbody id="dataTable">
                                     <!-- Data akan dimuat dari Google Spreadsheet -->
-                                    <tr><td colspan="5" class="text-center">Memuat data...</td></tr>
+                                    <tr>
+                                        <td colspan="5" class="text-center">Memuat data...</td>
+                                    </tr>
                                 </tbody>
                             </table>
                         </div>
                     </div>
                 </div>
             </div>
-            
             <!-- SLIDE 2: GAMBAR CONTOH -->
             <div class="carousel-item">
-                <div class="media-slide">
-                    <div class="media-content">
-                        <img src="https://via.placeholder.com/800x600/4a90e2/ffffff?text=Slide+2+-+Gambar+Contoh"
-                             alt="Slide 2" class="img-fluid">
+                <div>
+                    <div>
+                        <iframe src="https://www.google.com/maps/d/u/1/embed?mid=13J8-BWJPyW1GZcEo7YsKEv4flFD4IW0&ehbc=2E312F&noprof=1" width="100%" height="900px" style="padding: 50px 100px 50px 100px;"></iframe>
                     </div>
                 </div>
             </div>
-            
             <!-- SLIDE 3: VIDEO CONTOH -->
             <div class="carousel-item">
                 <div class="media-slide">
-                    <div class="media-content">
-                        <video controls autoplay muted loop>
-                            <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
+                    <div class="media-content w-100 embed-responsive embed-responsive-16by9 w-100 h-100 no-controls">
+                        <video controls autoplay muted loop controls controlsList="nodownload nofullscreen noplaybackrate">
+                            <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4" allowfullscreen>
                             Browser Anda tidak mendukung video HTML5.
                         </video>
                     </div>
                 </div>
             </div>
-            
             <!-- SLIDE 4: GAMBAR LAIN -->
             <div class="carousel-item">
                 <div class="media-slide">
                     <div class="media-content">
-                        <img src="https://via.placeholder.com/800x600/e74c3c/ffffff?text=Slide+4+-+Informasi+Layanan"
-                             alt="Slide 4" class="img-fluid">
+                        <div style="position: relative; width: 100%; height: 0; padding-top: 56.25%; padding-bottom: 0; box-shadow: 0 2px 8px 0 rgba(63,69,81,0.16); margin-top: 1.6em; margin-bottom: 0.9em; overflow: hidden; border-radius: 8px; will-change: transform;">
+                            <iframe loading="lazy" style="position: absolute; width: 100%; height: 100%; top: 0; left: 0; border: none; padding: 0; margin: 0;" src="https://www.canva.com/design/DAGrV6lehwg/9tUnZAS2Eg-vTwF3189FlA/view?embed" allowfullscreen></iframe>
+                        </div>
+                        <a href="https://www.canva.com/design/DAGrV6lehwg/9tUnZAS2Eg-vTwF3189FlA/view?utm_content=DAGrV6lehwg&utm_campaign=designshare&utm_medium=embeds&utm_source=link" target="_blank" rel="noopener">Pelayanan Publik Display</a>
                     </div>
                 </div>
             </div>
+            <!-- SLIDE 5: HASIL SKM 2024 -->
+            <div class="carousel-item">
+                <div class="media-slide" style="padding: 0; margin: 0; width: 100vw; height: 90vh; display: flex; flex-direction: column; justify-content: flex-end; align-items: center; background: #fff; position: relative;">
+                    <div style="flex: 1 1 auto; width: 100vw; height: 100%; display: flex; justify-content: center; align-items: center;">
+                        <img src="img/Hasil SKM 2024.webp" alt="Hasil SKM 2024" style="object-fit: cover; width: 100vw; height: 100vh; display: block; border-radius: 0; box-shadow: none; margin: 0; padding: 0;" />
+                    </div>
+                    <div style="height: 80px;"></div>
+                </div>
+            </div>
         </div>
+
         
         <!-- Tombol Navigasi Kiri -->
         <button class="carousel-control-prev" type="button" data-bs-target="#mainCarousel" data-bs-slide="prev">
@@ -732,13 +744,13 @@
     
     
     <!-- Footer Embedded -->
-     <footer>
-        <div class="footer-embedded">
+     <!-- <footer>
+        <div class="">
             <p class="footer-text">
                 © 2025 Direktorat Jenderal Bina Marga Satuan Kerja Balai Pelaksanaan Jalan Nasional Provinsi Lampung | Kementerian Pekerjaan Umum Republik Indonesia
             </p>
         </div>
-     </footer>
+     </footer> -->
 
     <!-- Bootstrap 5 JavaScript -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
@@ -926,35 +938,85 @@
             tableContainer.scrollTop = scrollPosition;
         }
 
-        // === FUNGSI DISPLAY DATA TABEL DENGAN EMOJI ===
+        // === SEARCHABLE DATA STATE ===
+        let allTableData = [];
+
+        // === FUNGSI RENDER INFOGRAFIS JUMLAH DAN PERSENTASE ===
+        function renderInfografisSummary(data) {
+            const infografis = document.getElementById('infografis-summary');
+            if (!infografis) return;
+            if (!data || !Array.isArray(data) || data.length === 0) {
+                infografis.innerHTML = '';
+                return;
+            }
+            let selesai = 0, proses = 0, belum = 0;
+            data.forEach(row => {
+                const status = (row.status || '').toLowerCase().trim();
+                if (status === 'selesai') selesai++;
+                else if (status === 'proses') proses++;
+                else belum++;
+            });
+            const total = data.length;
+            const persen = v => total ? Math.round((v/total)*100) : 0;
+            infografis.innerHTML = `
+                <div style="text-align:center;">
+                    <span style="font-size:1.1em;font-weight:700;color:#27ae60;">✅ ${selesai}</span><br>
+                    <span style="font-size:0.85em;color:#27ae60;">${persen(selesai)}%</span><br>
+                    <span style="font-size:0.75em;color:#888;">Selesai</span>
+                </div>
+                <div style="text-align:center;">
+                    <span style="font-size:1.1em;font-weight:700;color:#f39c12;">⚠️ ${proses}</span><br>
+                    <span style="font-size:0.85em;color:#f39c12;">${persen(proses)}%</span><br>
+                    <span style="font-size:0.75em;color:#888;">Proses</span>
+                </div>
+                <div style="text-align:center;">
+                    <span style="font-size:1.1em;font-weight:700;color:#e74c3c;">🛑 ${belum}</span><br>
+                    <span style="font-size:0.85em;color:#e74c3c;">${persen(belum)}%</span><br>
+                    <span style="font-size:0.75em;color:#888;">Belum Selesai</span>
+                </div>
+            `;
+        }
+
+        // === FUNGSI DISPLAY DATA TABEL DENGAN EMOJI & SEARCH ===
         function displayTableData(data) {
+            allTableData = data || [];
+            renderInfografisSummary(allTableData);
+            filterTableData();
+        }
+
+        // === FUNGSI FILTER TABEL BERDASARKAN SEARCH ===
+        function filterTableData() {
             const tableBody = document.getElementById('dataTable');
             if (!tableBody) return;
-            
-            console.log('=== DISPLAY TABLE DEBUG ===');
-            console.log('Data received:', data);
-            
+            const searchInput = document.getElementById('searchInput');
+            const query = searchInput ? searchInput.value.trim().toLowerCase() : '';
+
+            let filtered = allTableData;
+            if (query) {
+                filtered = allTableData.filter(row => {
+                    return (
+                        (row.jenisLayanan || '').toLowerCase().includes(query) ||
+                        (row.pemohon || '').toLowerCase().includes(query) ||
+                        (row.status || '').toLowerCase().includes(query) ||
+                        (row.keterangan || '').toLowerCase().includes(query) ||
+                        (row.no ? row.no.toString().includes(query) : false)
+                    );
+                });
+            }
+
             tableBody.innerHTML = '';
-            
-            if (!data || data.length === 0) {
+            if (!filtered || filtered.length === 0) {
                 tableBody.innerHTML = '<tr><td colspan="5" class="text-center">Tidak ada data tersedia</td></tr>';
                 return;
             }
-            
-            data.forEach((row, index) => {
-                console.log(`Row ${index}:`, row);
-                
-                // Pastikan semua field ada
+            filtered.forEach((row, index) => {
                 const no = row.no || (index + 1);
                 const jenisLayanan = row.jenisLayanan || 'Tidak ada data';
                 const pemohon = row.pemohon || 'Tidak ada data';
                 const status = row.status || 'Belum Selesai';
                 const keterangan = row.keterangan || 'Tidak ada keterangan';
-                
                 let statusClass = '';
                 let statusText = '';
-                
-                // Tentukan class CSS dan emoji berdasarkan status
                 switch(status.toString().toLowerCase().trim()) {
                     case 'selesai':
                         statusClass = 'status-selesai';
@@ -970,7 +1032,6 @@
                         statusClass = 'status-belum-selesai';
                         statusText = '🛑 Belum Selesai';
                 }
-                
                 const tr = document.createElement('tr');
                 tr.innerHTML = `
                     <td class="col-no">${no}</td>
