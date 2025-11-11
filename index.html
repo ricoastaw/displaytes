@@ -103,9 +103,18 @@
 
         .main-title {
             font-size: 4.2rem;
-            font-weight: bold;
+            font-weight: 800;
             margin-bottom: 6px;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            text-shadow: 2px 2px 4px rgba(248, 248, 248, 0.25);
+        }
+
+        /* Title word colors */
+        .main-title .title-blue {
+            color: #465180; /* blue */
+        }
+
+        .main-title .title-yellow {
+            color: #f0ba33; /* yellow */
         }
 
         .main-subtitle {
@@ -150,7 +159,7 @@
             font-size: 1.2rem;
             font-weight: 700;
             margin: 0;
-            text-shadow: 0 1px 2px rgba(0,0,0,0.1);
+            text-shadow: 0 1px 2px rgba(243, 237, 237, 0.1);
         }
 
         #refreshBtn {
@@ -226,7 +235,7 @@
         }
 
         .table-scroll {
-            height: 540px;
+            height: 500px;
             overflow-y: auto;
             scrollbar-width: thin;
             scrollbar-color: #bdc3c7 #ecf0f1;
@@ -254,7 +263,7 @@
         .table {
             color: #2c3e50;
             margin-bottom: 0;
-            font-size: 0.8rem;
+            font-size: 10rem; /* diperbesar untuk keterbacaan */
             border-collapse: separate;
             border-spacing: 0;
         }
@@ -268,10 +277,10 @@
             font-weight: 700;
             text-align: center;
             vertical-align: middle;
-            padding: 15px 10px;
+            padding: 16px 12px;
             text-transform: uppercase;
             letter-spacing: 0.5px;
-            font-size: 0.85rem;
+            font-size: 1rem; /* cocokkan dengan isi tabel */
             border: none;
             box-shadow: 0 2px 4px rgba(0,0,0,0.1);
         }
@@ -286,9 +295,10 @@
 
         .table td {
             vertical-align: top;
-            padding: 12px 10px;
+            padding: 14px 12px; /* diperbesar sedikit untuk kenyamanan baca */
             border-bottom: 1px solid #ecf0f1;
             transition: all 0.3s ease;
+            font-size: 1rem; /* pastikan isi ikut membesar */
         }
 
         .table tbody tr {
@@ -610,6 +620,68 @@
                 margin-right: 4px;
             }
         }
+
+        /* === INFOGRAFIS SUMMARY (CENTERED & ENLARGED) === */
+        #infografis-summary {
+            position: absolute;
+            left: 60%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 28px;
+            align-items: center;
+            justify-content: center;
+            top: -50%; /* small offset to sit nicely in the header */
+            pointer-events: none; /* non-interactive decorative element */
+            z-index: 20;
+        }
+
+        /* Each block inside the infographic */
+        #infografis-summary > div {
+            padding: 6px 10px;
+            text-align: center;
+            background: rgba(255,255,255,0.03);
+            border-radius: 8px;
+            min-width: 72px;
+        }
+
+        /* Large numeric count */
+        #infografis-summary > div span.count {
+            display: block;
+            font-size: 1.6rem;
+            font-weight: 800;
+            line-height: 1;
+        }
+
+        /* Percentage */
+        #infografis-summary > div span.percent {
+            display: block;
+            font-size: 1rem;
+            margin-top: 4px;
+            font-weight: 700;
+            opacity: 0.95;
+        }
+
+        /* Label */
+        #infografis-summary > div span.label {
+            display: block;
+            font-size: 0.85rem;
+            color: #777;
+            margin-top: 2px;
+        }
+
+        /* Responsive fallback: on narrow screens stack infographic under title */
+        @media (max-width: 700px) {
+            #infografis-summary {
+                position: static;
+                transform: none;
+                margin-left: 12px;
+                gap: 12px;
+                pointer-events: auto;
+            }
+            .refresh-container { flex-wrap: wrap; }
+            #infografis-summary > div span.count { font-size: 1.1rem; }
+            #infografis-summary > div span.percent { font-size: 0.9rem; }
+        }
     </style>
 </head>
 <body>
@@ -624,8 +696,8 @@
                 <div class="main-slide">
                     <!-- Header Utama -->
                     <div>
-                        <h1 class="main-title">PELAYANAN PUBLIK</h1>
-                        <h2 class="main-subtitle">BPJN LAMPUNG</h2>
+                        <h1 class="main-title"><span class="title-blue">PELAYANAN</span> <span class="title-yellow">PUBLIK</span></h1>
+                        <!-- <h2 class="main-subtitle">BPJN LAMPUNG</h2> -->
                     </div>
                     <!-- Jam dan Tanggal Real-time -->
                     <div class="datetime-container">
@@ -646,15 +718,15 @@
                     <!-- Tabel Data dari Google Spreadsheet -->
                     <div class="table-container">
                         <!-- Header dengan tombol refresh dan search -->
-                        <div class="refresh-container" style="flex-wrap">
-                            <div style="display: flex; align-items: center; width: 100%;">
-                                <h5 class="refresh-title" style="flex: 1 1 200px; margin-bottom: 0;">
-                                    <i class="bi bi-table"></i> Data Pelayanan Real-time
-                                </h5>
-                                <div id="infografis-summary" style="display: flex; gap: 18px; align-items: center; margin-left: 18px;">
-                                    <!-- Infografis will be rendered here -->
+                        <div class="refresh-container">
+                            <div style="display: flex; align-items: center; width: 100%; position: relative;">
+                                    <h5 class="refresh-title" style="flex: 0 0 auto; margin-bottom: 0;">
+                                        <i class="bi bi-table"></i> Data Pelayanan Real-time
+                                    </h5>
+                                    <div id="infografis-summary">
+                                        <!-- Infografis will be rendered here -->
+                                    </div>
                                 </div>
-                            </div>
                             <div class="d-flex flex-column align-items-end" style="gap: 5px;">
                                 <input id="searchInput" type="text" class="form-control form-control-sm" placeholder="Pencarian...." style="min-width: 220px; max-width: 300px; margin-bottom: 4px;" oninput="filterTableData()">
                                 <button id="refreshBtn" class="btn btn-primary btn-sm" onclick="refreshTableData()">
@@ -688,15 +760,15 @@
                 </div>
             </div>
             <!-- SLIDE 2: GAMBAR CONTOH -->
-            <div class="carousel-item">
+            <!-- <div class="carousel-item">
                 <div>
                     <div>
                         <iframe src="https://www.google.com/maps/d/u/1/embed?mid=13J8-BWJPyW1GZcEo7YsKEv4flFD4IW0&ehbc=2E312F&noprof=1" width="100%" height="900px" style="padding: 50px 100px 50px 100px;"></iframe>
                     </div>
                 </div>
-            </div>
+            </div> -->
             <!-- SLIDE 3: VIDEO CONTOH -->
-            <div class="carousel-item">
+            <!-- <div class="carousel-item">
                 <div class="media-slide">
                     <div class="media-content w-100 embed-responsive embed-responsive-16by9 w-100 h-100 no-controls">
                         <video controls autoplay muted loop controls controlsList="nodownload nofullscreen noplaybackrate">
@@ -705,9 +777,9 @@
                         </video>
                     </div>
                 </div>
-            </div>
+            </div>  -->
             <!-- SLIDE 4: GAMBAR LAIN -->
-            <div class="carousel-item">
+            <!-- <div class="carousel-item">
                 <div class="media-slide">
                     <div class="media-content">
                         <div style="position: relative; width: 100%; height: 0; padding-top: 56.25%; padding-bottom: 0; box-shadow: 0 2px 8px 0 rgba(63,69,81,0.16); margin-top: 1.6em; margin-bottom: 0.9em; overflow: hidden; border-radius: 8px; will-change: transform;">
@@ -716,16 +788,47 @@
                         <a href="https://www.canva.com/design/DAGrV6lehwg/9tUnZAS2Eg-vTwF3189FlA/view?utm_content=DAGrV6lehwg&utm_campaign=designshare&utm_medium=embeds&utm_source=link" target="_blank" rel="noopener">Pelayanan Publik Display</a>
                     </div>
                 </div>
-            </div>
+            </div> -->
             <!-- SLIDE 5: HASIL SKM 2024 -->
             <div class="carousel-item">
-                <div class="media-slide" style="padding: 0; margin: 0; width: 100vw; height: 90vh; display: flex; flex-direction: column; justify-content: flex-end; align-items: center; background: #fff; position: relative;">
+                <div class="media-slide" style="padding: 0; margin-top: 40px; width: 100vw; height: 90vh; display: flex; flex-direction: column; justify-content: flex-end; align-items: center; background: #fff; position: relative;">
                     <div style="flex: 1 1 auto; width: 100vw; height: 100%; display: flex; justify-content: center; align-items: center;">
                         <img src="img/Hasil SKM 2024.webp" alt="Hasil SKM 2024" style="object-fit: cover; width: 100vw; height: 100vh; display: block; border-radius: 0; box-shadow: none; margin: 0; padding: 0;" />
                     </div>
                     <div style="height: 80px;"></div>
                 </div>
             </div>
+            
+            <!-- SLIDE 6: STANDAR PELAYANAN -->
+            <div class="carousel-item">
+                <div class="media-slide" style="padding: 0; margin-top: 40px; width: 100vw; height: 90vh; display: flex; flex-direction: column; justify-content: flex-end; align-items: center; background: #fff; position: relative;">
+                    <div style="flex: 1 1 auto; width: 100vw; height: 100%; display: flex; justify-content: center; align-items: center;">
+                        <img src="img/Standar Pelayanan.webp" alt="Standar Pelayanan" style="object-fit: cover; width: 100vw; height: 100vh; display: block; border-radius: 0; box-shadow: none; margin: 0; padding: 0;" />
+                    </div>
+                    <div style="height: 80px;"></div>
+                </div>
+            </div>
+
+            <!-- SLIDE 7: STANDAR PELAYANAN DETAIL -->
+            <div class="carousel-item">
+                <div class="media-slide" style="padding: 0; margin-top: 40px; width: 100vw; height: 90vh; display: flex; flex-direction: column; justify-content: flex-end; align-items: center; background: #fff; position: relative;">
+                    <div style="flex: 1 1 auto; width: 100vw; height: 100%; display: flex; justify-content: center; align-items: center;">
+                        <img src="img/Standar Pelayanan Detail.webp" alt="Standar Pelayanan Detail" style="object-fit: cover; width: 100vw; height: 100vh; display: block; border-radius: 0; box-shadow: none; margin: 0; padding: 0;" />
+                    </div>
+                    <div style="height: 80px;"></div>
+                </div>
+            </div>
+
+            <!-- SLIDE 8: JAM OPERASIONAL -->
+            <div class="carousel-item">
+                <div class="media-slide" style="padding: 0; margin-top: 40px; width: 100vw; height: 90vh; display: flex; flex-direction: column; justify-content: flex-end; align-items: center; background: #fff; position: relative;">
+                    <div style="flex: 1 1 auto; width: 100vw; height: 100%; display: flex; justify-content: center; align-items: center;">
+                        <img src="img/Jam Operasional.webp" alt="Jam Operasional" style="object-fit: cover; width: 100vw; height: 100vh; display: block; border-radius: 0; box-shadow: none; margin: 0; padding: 0;" />
+                    </div>
+                    <div style="height: 80px;"></div>
+                </div>
+            </div>
+
         </div>
 
         
@@ -836,13 +939,11 @@
         function updateDateTime() {
             const now = new Date();
             
-            // Format jam (HH:MM:SS)
-            const timeString = now.toLocaleTimeString('id-ID', {
-                hour12: false,
-                hour: '2-digit',
-                minute: '2-digit',
-                second: '2-digit'
-            });
+            // Format jam (HH:MM:SS) - manual to ensure colon separators regardless of locale
+            const hh = String(now.getHours()).padStart(2, '0');
+            const mm = String(now.getMinutes()).padStart(2, '0');
+            const ss = String(now.getSeconds()).padStart(2, '0');
+            const timeString = `${hh}:${mm}:${ss}`;
             
             // Format tanggal (Hari, DD Bulan YYYY)
             const dateString = now.toLocaleDateString('id-ID', {
@@ -914,27 +1015,30 @@
 
             const tableContainer = document.getElementById('tableScroll');
             if (!tableContainer) return;
-            
-            const maxScroll = tableContainer.scrollHeight - tableContainer.clientHeight;
-            
+            const maxScroll = Math.max(0, tableContainer.scrollHeight - tableContainer.clientHeight);
+
             // Jika tidak ada konten untuk di-scroll, keluar
-            if (maxScroll <= 0) return;
-            
+            if (maxScroll <= 0) {
+                scrollPosition = 0;
+                tableContainer.scrollTop = 0;
+                return;
+            }
+
             // Scroll ke bawah
             if (scrollDirection === 1) {
-                scrollPosition += 1;
+                scrollPosition = Math.min(maxScroll, scrollPosition + 1);
                 if (scrollPosition >= maxScroll) {
                     scrollDirection = -1; // Balik arah ke atas
                 }
             }
             // Scroll ke atas
             else {
-                scrollPosition -= 1;
+                scrollPosition = Math.max(0, scrollPosition - 1);
                 if (scrollPosition <= 0) {
                     scrollDirection = 1; // Balik arah ke bawah
                 }
             }
-            
+
             tableContainer.scrollTop = scrollPosition;
         }
 
@@ -959,20 +1063,20 @@
             const total = data.length;
             const persen = v => total ? Math.round((v/total)*100) : 0;
             infografis.innerHTML = `
-                <div style="text-align:center;">
-                    <span style="font-size:1.1em;font-weight:700;color:#27ae60;">✅ ${selesai}</span><br>
-                    <span style="font-size:0.85em;color:#27ae60;">${persen(selesai)}%</span><br>
-                    <span style="font-size:0.75em;color:#888;">Selesai</span>
+                <div>
+                    <span class="count" style="color:#27ae60;">✅ ${selesai}</span>
+                    <span class="percent" style="color:#27ae60;">${persen(selesai)}%</span>
+                    <span class="label">Selesai</span>
                 </div>
-                <div style="text-align:center;">
-                    <span style="font-size:1.1em;font-weight:700;color:#f39c12;">⚠️ ${proses}</span><br>
-                    <span style="font-size:0.85em;color:#f39c12;">${persen(proses)}%</span><br>
-                    <span style="font-size:0.75em;color:#888;">Proses</span>
+                <div>
+                    <span class="count" style="color:#f39c12;">⚠️ ${proses}</span>
+                    <span class="percent" style="color:#f39c12;">${persen(proses)}%</span>
+                    <span class="label">Proses</span>
                 </div>
-                <div style="text-align:center;">
-                    <span style="font-size:1.1em;font-weight:700;color:#e74c3c;">🛑 ${belum}</span><br>
-                    <span style="font-size:0.85em;color:#e74c3c;">${persen(belum)}%</span><br>
-                    <span style="font-size:0.75em;color:#888;">Belum Selesai</span>
+                <div>
+                    <span class="count" style="color:#e74c3c;">🛑 ${belum}</span>
+                    <span class="percent" style="color:#e74c3c;">${persen(belum)}%</span>
+                    <span class="label">Belum Selesai</span>
                 </div>
             `;
         }
@@ -982,6 +1086,12 @@
             allTableData = data || [];
             renderInfografisSummary(allTableData);
             filterTableData();
+
+            // Reset auto-scroll position when new data is loaded so last rows are reachable
+            scrollPosition = 0;
+            scrollDirection = 1;
+            const tableContainerAfterLoad = document.getElementById('tableScroll');
+            if (tableContainerAfterLoad) tableContainerAfterLoad.scrollTop = 0;
         }
 
         // === FUNGSI FILTER TABEL BERDASARKAN SEARCH ===
@@ -1007,6 +1117,11 @@
             tableBody.innerHTML = '';
             if (!filtered || filtered.length === 0) {
                 tableBody.innerHTML = '<tr><td colspan="5" class="text-center">Tidak ada data tersedia</td></tr>';
+                const tableContainerEmpty = document.getElementById('tableScroll');
+                if (tableContainerEmpty) {
+                    scrollPosition = 0;
+                    tableContainerEmpty.scrollTop = 0;
+                }
                 return;
             }
             filtered.forEach((row, index) => {
@@ -1044,6 +1159,15 @@
                 `;
                 tableBody.appendChild(tr);
             });
+
+            // Ensure scrollPosition is within bounds after rendering filtered results
+            const tableContainer = document.getElementById('tableScroll');
+            if (tableContainer) {
+                const maxScroll = Math.max(0, tableContainer.scrollHeight - tableContainer.clientHeight);
+                if (scrollPosition > maxScroll) scrollPosition = maxScroll;
+                if (scrollPosition < 0) scrollPosition = 0;
+                tableContainer.scrollTop = scrollPosition;
+            }
         }
 
         // === FUNGSI LOAD DATA DARI GOOGLE SPREADSHEET ===
@@ -1113,15 +1237,15 @@
         // === FUNGSI UPDATE WAKTU TERAKHIR ===
         function updateLastUpdateTime() {
             const now = new Date();
-            const timeString = now.toLocaleTimeString('id-ID', {
-                hour: '2-digit',
-                minute: '2-digit',
-                second: '2-digit'
-            });
+            // Manual format to guarantee colons
+            const hh = String(now.getHours()).padStart(2, '0');
+            const mm = String(now.getMinutes()).padStart(2, '0');
+            const ss = String(now.getSeconds()).padStart(2, '0');
+            const timeString = `${hh}:${mm}:${ss}`;
             
             const lastUpdateElement = document.getElementById('lastUpdate');
             if (lastUpdateElement) {
-                lastUpdateElement.textContent = `Terakhir diperbarui: ${timeString}`;
+                lastUpdateElement.textContent = `Terakhir diperbarui: ${timeString} WIB`;
             }
             lastUpdateTime = now;
         }
